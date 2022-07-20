@@ -1,9 +1,10 @@
 .test-constructor_header{
     display: flex;
+    align-items: center;
     justify-content: space-between;
 
     .name{
-
+        display: flex;
     }
 
     .name_input{
@@ -17,6 +18,11 @@
     .name_icon{
 
     }
+
+    .controll{
+        display: flex;
+            
+    }    
 }
 
 .test-constructor{

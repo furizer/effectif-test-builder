@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="test-constructor_header">
-        
+
         <div class="name title">         
 
             <input class="name_input" value="" placeholder="Новый тест">
@@ -18,7 +18,7 @@
 
         </div>
 
-        <div>
+        <div class="controll">
             <div class="btn add-question">
                 Добавить вопрос
             </div>
