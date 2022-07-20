@@ -1,6 +1,12 @@
 <template>
-<div>
-    <div class="test-constructor_header">
+
+<PageCrumbs
+    :entities="crumbsEntities"
+/>
+
+<div class="test-constructor_header">
+    <div>
+
 
         <div class="name title">         
 
@@ -17,27 +23,40 @@
             </div>
 
         </div>
-
-        <div class="controll">
-            <div class="btn add-question">
-                Добавить вопрос
-            </div>
-            <div class="btn end-test-create">
-                Закончить создание
-            </div>
-        </div>
-
     </div>
-
-    <div class="test-constructor">
-
+    <div class="controll">
+        <div class="btn add-question">
+            Добавить вопрос
+        </div>
+        <div class="btn end-test-create">
+            Закончить создание
+        </div>
     </div>
 
 </div>
+
+<div class="test-constructor">
+
+</div>
+
 </template>
 
 <script>
+import PageCrumbs from '@/components/PageCrumbs'
+
 export default {
+    components : {PageCrumbs},
+
+    data() {
+        return {
+            crumbsEntities: [
+                {
+                    'text': 'Обратно',
+                    'routeName': 'builderIndex',
+                }
+            ]
+        }
+    },      
     
 }
 </script>

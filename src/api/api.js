@@ -28,8 +28,8 @@ const delay = 300
 
 const api = {
 
-    index: {
-        test (args, cb) {
+    builderIndex: {
+        tests (args, cb) {
             setTimeout(() => cb(mock.tests), delay)
         }, 
      

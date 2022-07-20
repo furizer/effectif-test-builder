@@ -1,18 +1,29 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import index from '@/pages/indexPage'
-import testConstructor from '@/pages/testConstructor'
+
+import builderIndex from '@/pages/BuilderIndex'
+import testConstructor from '@/pages/TestConstructor'
+import oneTestPage from '@/pages/OneTest'
+
+const rootRoute = '/test_builder'
 
 const routes = [
   {
-    path: '/',
-    name: 'index',
-    component: index
+    path: `${rootRoute}`,
+    name: 'builderIndex',
+    component: builderIndex
   },
   {
-    path: '/testConstructor',
+    path: `${rootRoute}/constructor`,
     name: 'testConstructor',
     component: testConstructor
   },
+  {
+    // path: `${rootRoute}` + '/testList/test/:id',
+    path: `${rootRoute}` + '/testList/:id',
+    name: 'oneTestPage',
+    component: oneTestPage
+  },  
+
 
 ]
 
@@ -20,5 +31,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+console.log(router);
 
 export default router
