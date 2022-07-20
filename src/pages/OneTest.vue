@@ -1,5 +1,4 @@
 <template>
-
 <PageCrumbs
     :entities="crumbsEntities"
 />
@@ -28,19 +27,14 @@ export default {
 
         }
     },
-
     computed: {
         test() {
-            return Test.find(1)
+            console.log(this.$router);
+            return Test.find(this.$route.params.id)
         }
     },
-
     created() {
         if(!this.test) Test.fetch()
     },
-
-
-    
-    
 }
 </script>
