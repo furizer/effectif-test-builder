@@ -1,16 +1,41 @@
 const tests = [
     {
         'id': 1,
-        'name': 'Tест 1'
+        'name': 'Tест 1',
+        'questions': [
+            {
+                'id' : 1,
+                'trueAnser' : 0,
+                'questionText' : '1000-7?', 
+                
+                'answers': [
+                    {
+                        'answerText' : '993',
+                    },
+                    {
+                        'answerText' : '992',
+                    },                                    
+                ]
+            },
+            {
+                'id' : 2,
+                'questionText' : 'Сколько пальцев у человека?', 
+                'trueAnser' : 1,
+
+                'answers': [
+                    {
+                        'answerText' : '21',
+                    },
+                    {
+                        'answerText' : '20',
+                    },                                       
+                ]
+            }            
+        ]
     },
-    {
-        'id': 2,
-        'name': 'Tест 2'
-    },
-    {
-        'id': 3,
-        'name': 'Tест 3'
-    },
+
+
+
 ]
 
 export default {

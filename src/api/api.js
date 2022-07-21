@@ -24,7 +24,7 @@ function save(entityName, data) {
     return entity
 }
 
-const delay = 300
+const delay = 500
 
 const api = {
 
@@ -36,7 +36,7 @@ const api = {
 
         
         save(args, cb) {
-            setTimeout(() => cb(save('Tests', args)), delay)
+            setTimeout(() => cb(save('tests', args)), delay)
         },
 
     },

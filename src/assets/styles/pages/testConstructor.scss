@@ -24,8 +24,58 @@
         display: flex;
             
     }    
+
+    .add-question {
+        margin-right: 10px;
+    }
+
+    .end-test-create{
+        background:#3ebd35;
+    }
+
+    .end-test-create:hover{
+        background: $siteGray;
+    }
 }
 
 .test-constructor{
-
+    margin-top: 40px;
 }
+
+.test-constructor__question{
+    margin-bottom: 15px;
+    margin-top: 15px;
+
+    .question__header{
+        display: flex;
+    }
+
+    .question-input{
+        width: 100%;
+    }
+
+    .question__controller{
+        padding-left: 10px;
+        display: flex;
+    }
+    .add-answer {
+        margin-right: 10px;
+    }
+
+    .question-input{
+        padding-left: 10px;
+        font-size: 16px;
+    }
+}
+
+.answers__container{
+    padding: 10px 15px;
+    padding-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    .answer-label{
+        margin-bottom: 15px;
+        width: 33%;
+        display: flex;
+    }
+} 
