@@ -9,13 +9,13 @@
 
                 <div class="btn add-answer" @click="addAnswer"> Добавить ответ </div>
 
-                <div class="btn save-question" > Показать </div>
+                <div class="btn save-question" @click="showAnswerList"> Показать </div>
 
             </div>
 
         </div>
 
-        <div class="answers__container">
+        <div class="answers__container" v-if="answerList">
 
             <label class="answer-label"  for="answer" v-for="answer in newQuestion.answers" :key="answer.id"  >
                 
@@ -47,7 +47,9 @@ export default {
                         'answerText' : '',
                     },  
                 ]                    
-            }
+            },
+
+            answerList : true,
         }
     },
 
@@ -69,9 +71,15 @@ export default {
                 }
             });
             this.saveQuestion()
+        },
 
-
-
+        showAnswerList() {
+            if(this.answerList === false){
+                this.answerList = true
+            }else {
+                this.answerList = false
+            }
+            
         },
 
         saveQuestion() {

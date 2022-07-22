@@ -79,3 +79,10 @@
         display: flex;
     }
 } 
+
+.answers__container.hidden {
+    height: 0px;
+    max-height: 0px;
+    opacity: 0;
+    transition: 0.3s;
+}
