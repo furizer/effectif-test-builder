@@ -5,9 +5,9 @@ const tests = [
         'questions': [
             {
                 'id' : 1,
-                'trueAnser' : 0,
+                'trueAnswer' : 0,
                 'questionText' : '1000-7?', 
-                
+
                 'answers': [
                     {
                         'answerText' : '993',
@@ -20,7 +20,7 @@ const tests = [
             {
                 'id' : 2,
                 'questionText' : 'Сколько пальцев у человека?', 
-                'trueAnser' : 1,
+                'trueAnswer' : 1,
 
                 'answers': [
                     {

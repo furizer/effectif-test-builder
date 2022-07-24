@@ -94,6 +94,9 @@ export default {
             this.newTest.id = this.tests.slice(-1)[0].id + 1
 
             let newTest = this.newTest
+
+            
+
             Test.insert({
                 data: {
                     id : newTest.id,
