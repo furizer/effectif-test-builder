@@ -17,7 +17,7 @@
         <div class="btn add-question" @click="addQuestion">
             Добавить вопрос
         </div>
-        <div class="btn end-test-create" @click="saveTest" v-if="tests">
+        <div class="btn end-create-btn" @click="saveTest" v-if="tests">
             Закончить создание
         </div>
     </div>

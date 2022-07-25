@@ -22,19 +22,6 @@
             
     }    
 
-
-    // test-constructor buttons
-    .add-question {
-        margin-right: 10px;
-    }
-    .end-test-create{
-        background:#3ebd35;
-    }
-    .end-test-create:hover{
-        opacity: 0.6;
-        color: $siteWhite;
-        transition: 0.3s;
-    }
 }
 
 .test-constructor{
@@ -73,7 +60,7 @@
 
     .question-input{
         width: 100%;
-        height: 40px;
+        height: 47px;
         padding-left: 10px;
         font-size: 16px;        
     }
@@ -83,24 +70,8 @@
         display: flex;
     }
 
-    // test-constructor buttons
-    .add-answer {
-        margin-right: 6px;
-    }
-    .show-question{
-        margin-right: 6px;
-    }
-    .show-question.active {
-        background: $siteGray;
-        color: $siteOrange;
-    }
-    .delete-question{
-        background: #ed300e;
-    }
-    .delete-question:hover {
-        color: $siteWhite;
-        opacity: 0.6;
-    }
+
+
 }
 
 .answers__container{
@@ -116,14 +87,14 @@
 
 .answer-label{
 
-    padding: 15px 50px;
+    padding: 16px 50px;
     border-radius: 6px;
 
-    box-shadow: 3px 3px 10px rgb(223, 220, 220);
+    box-shadow: 2px 2px 5px 3px rgb(229 229 229);
     cursor: pointer;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 30%;
+    width: 23%;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -139,7 +110,7 @@
         padding: 7px;
         width: 100%;
         resize: none;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         margin-top: 15px;
 
         border: 2px solid $siteGray;

@@ -9,18 +9,20 @@
             <input class="question-input" 
                 v-model="newQuestion.questionText" 
                 placeholder="Вопрос" 
-                @change="trueAnswerAndSave" 
-                nameForCheck="questionText">
+                nameForCheck="questionText"
 
+                @change="trueAnswerAndSave" 
+            >
+                
  
 
             <div class="question__controller">
 
                 <div class="btn add-answer" @click="addAnswer"> Добавить ответ </div>
 
-                <div :class=" { 'btn show-question' : true, active : answerList }" @click="showAnswerList"> Ответы </div>
+                <div :class=" { 'btn show-btn' : true, active : answerList }" @click="showAnswerList"  :disabled="answerListButton" > Ответы </div>
 
-                <div class="btn delete-question" @click="deleteQuestion"> Удалить </div>
+                <div class="btn delete-btn" @click="deleteQuestion"> Удалить </div>
 
 
             </div>
@@ -31,19 +33,24 @@
 
             <label class="answer-label" 
                 v-for="(answer, index) in newQuestion.answers" 
-                :key="answer.id" 
+                
                 @change="trueAnswerAndSave" 
-                :name=" 'answer' + question.id ">
+
+                :key="answer.id" 
+                :name=" 'answer' + question.id "
+            >
 
                 <div class="answer-label-header">
                     <div class="answer-label-title">Верный ответ</div>
                     
                     <input 
                         type="radio" 
-                        :name=" 'answer' + question.id " 
                         class="answer-checkbox-hidden" 
-                        :radioId="index"
                         nameForCheck="trueAnswer"
+
+                        :name=" 'answer' + question.id " 
+                        :radioId="index"
+                        :checked="checked(index)"
                     >
 
                     <div class="answer-checkbox">
@@ -53,7 +60,7 @@
                 </div>
                 <textarea class="answer__text"  v-model="answer.answerText" nameForCheck="answerText"></textarea>
 
-                <div class="btn delete-question" @click="deleteAnswer(answer.id)"> Удалить ответ</div>
+                <div class="btn delete-btn" @click="deleteAnswer(answer.id)"> Удалить ответ</div>
 
 
             </label>
@@ -84,10 +91,8 @@ export default {
                     // },  
                 ]                    
             },
-
-
-
             answerList : false,
+            answerListButton : false
         }
     },
 
@@ -104,6 +109,10 @@ export default {
             
         },
 
+        checked(index) {
+            if(index == this.newQuestion.trueAnswer) return true
+        },
+
         trueAnswerAndSave(e) {
             let index = e.target.getAttribute('radioid')
             if(index != null && index != undefined){
@@ -118,17 +127,31 @@ export default {
             }else {
                 this.answerList = false
             }
+
+            // if(this.newQuestion.trueAnswer != null) {
+
+            // }
             
         },
 
         deleteAnswer(answerId) {
-            console.log(answerId);
             this.newQuestion.answers = this.newQuestion.answers.filter((item) => item.id !== answerId)
-           
+            this.$emit('saveQuestion', this.newQuestion)
+            
         },
         deleteQuestion() {
             this.$emit('deleteQuestion', this.newQuestion)
         },        
+    },
+
+
+    updated() {
+        if(this.newQuestion.answers.length < 1) {
+            this.answerList = false
+            this.answerListButton = false
+        }else{
+            this.answerListButton = true
+        }
     },
 
 }
