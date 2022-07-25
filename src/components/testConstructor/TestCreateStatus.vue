@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="status-bar"> СТАТУС {{currentStatus.text}}</div>
-        <div @click="checkStatus">ПРОВЕРИТЬ СТАТУС</div>
+        <!-- <div class="status-bar"> СТАТУС {{currentStatus.text}}</div>
+        <div @click="checkStatus">ПРОВЕРИТЬ СТАТУС</div> -->
     </div>
 </template>
 
