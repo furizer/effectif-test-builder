@@ -38,7 +38,7 @@
 
                 :key="answer.id" 
                 :name=" 'answer' + question.id "
-                :title=" 'Вопрос № ' "
+                :title=" 'Ответ № ' + index"
             >
 
                 <div class="answer-label-header">

@@ -1,28 +1,33 @@
 <template >
 
-<PageCrumbs
-    :entities="crumbsEntities"
-/>
+<div class="test-contstructor-wrapper">
+    <div class="test-constructor_header">
+        <div class="test-constructor_container container">
+            <div class="name_wrapper">         
 
-<div class="test-constructor_header">
-    <div class="name_wrapper">         
+                <input class="name_input" autofocus placeholder="Новый тест" v-model="newTest.name"  nameForCheck="testName" >
 
-        <input class="name_input" autofocus placeholder="Новый тест" v-model="newTest.name"  nameForCheck="testName">
+                <TestCreateStatus
+                />  
 
-        <TestCreateStatus
-        />  
-
-    </div>
-    <div class="controll">
-        <div class="btn add-question" @click="addQuestion">
-            Добавить вопрос
+            </div>
+            <div class="controll">
+                <div class="btn add-question" @click="addQuestion">
+                    Добавить вопрос
+                </div>
+                <div class="btn end-create-btn" @click="saveTest" v-if="tests">
+                    Сохранить
+                </div>
+                <div class="btn delete-btn">
+                    <PageCrumbs
+                        :entities="crumbsEntities"
+                    /> 
+                </div>
+            </div>
         </div>
-        <div class="btn end-create-btn" @click="saveTest" v-if="tests">
-            Закончить создание
-        </div>
     </div>
+</div>  
 
-</div>
 
 <div class="test-constructor">
     <OneQuestion
@@ -54,7 +59,7 @@ export default {
             
             crumbsEntities: [
                 {
-                    'text': 'Обратно',
+                    'text': 'Отменить',
                     'routeName': 'builderIndex',
                 }
             ],
@@ -105,9 +110,8 @@ export default {
             })
             this.$router.push('./');
         },   
-        
 
-
+ 
         setQuestionPosition() {
             this.newTest.questions.forEach((element, index) => {
                 element.questionPosition = index + 1
