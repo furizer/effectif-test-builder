@@ -5,22 +5,13 @@
 />
 
 <div class="test-constructor_header">
-    <div>
-        <div class="name title">         
+    <div class="name_wrapper">         
 
-            <input class="name_input" autofocus placeholder="Новый тест" v-model="newTest.name">
+        <input class="name_input" autofocus placeholder="Новый тест" v-model="newTest.name"  nameForCheck="testName">
 
-            <!-- <div class="name_confirm">
-                <div class="name_icon">
-                    <img src="" alt="confirm-icon">
-                </div>
+        <TestCreateStatus
+        />  
 
-                <div class="name_icon">
-                    <img src="" alt="editing-icon">
-                </div>
-            </div> -->
-
-        </div>
     </div>
     <div class="controll">
         <div class="btn add-question" @click="addQuestion">
@@ -50,12 +41,17 @@
 import PageCrumbs from '@/components/PageCrumbs'
 import Test from '@/store/test/Test'
 import OneQuestion from '@/components/testConstructor/OneQuestion'
+import TestCreateStatus from '@/components/testConstructor/TestCreateStatus'
+
 
 export default {
-    components : { PageCrumbs, OneQuestion },
+    components : { PageCrumbs, OneQuestion, TestCreateStatus },
 
     data() {
         return {
+            
+            currentStatus : null,   
+            
             crumbsEntities: [
                 {
                     'text': 'Обратно',
@@ -67,19 +63,22 @@ export default {
                 'id': null,
                 'name': '',
                 'questions' : [
-                    {
-                        'id': 0,
-                        'questionText' : '',
-                        'trueAnswer' : null,
 
-                        'answers' : [
-                            {
-                                'answerText' : '',
-                            },
-                        ]
-                    }
+                    // Если по дефолту требуется один вопрос - расскоментить
+                    // {
+                    //     'id': 0,
+                    //     'questionText' : '',
+                    //     'trueAnswer' : null,
+
+                    //     'answers' : [
+                    //         {
+                    //             'answerText' : '',
+                    //         },
+                    //     ]
+                    // }
                 ]
-            }
+            },
+
         }
     },     
     
@@ -107,31 +106,41 @@ export default {
             this.$router.push('./');
         },   
         
-        onSaveQuestion(data) {
-            console.log('save question');
-            let i = this.newTest.questions.findIndex(item => item.id === data.id)
-            this.newTest.questions[i] = data
+
+
+        setQuestionPosition() {
+            this.newTest.questions.forEach((element, index) => {
+                element.questionPosition = index + 1
+            });
         },
 
-        
 
+
+        addQuestion() {
+            let question = Object.assign({}, this.newTest.questions[0])
+            question.id = Date.now()
+            this.newTest.questions.push(question)
+
+            this.setQuestionPosition()
+        },
         // Удаление вопроса
         onDeleteQuestion(data) {
             this.newTest.questions = this.newTest.questions.filter((item) => item.id !== data.id)
+            
+            this.setQuestionPosition()
         },
-
-        // Добавление вопроса
-        addQuestion() {
-            let question = Object.assign({}, this.newTest.questions[0])
-
-            question.id = Date.now()
-
-            this.newTest.questions.push(question)
-        }
+        onSaveQuestion(data) {
+            this.setQuestionPosition()
+            console.log('save question');
+            let i = this.newTest.questions.findIndex(item => item.id === data.id)
+            this.newTest.questions[i] = data
+        },        
+    
     },
 
 
     created() {
+        this.setQuestionPosition()        
         if(Object.keys(this.tests).length > 0){
             return
         }

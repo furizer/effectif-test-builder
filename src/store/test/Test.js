@@ -14,6 +14,7 @@ export default class Test extends Model {
                 id: this.number(0),
                 questionText: this.string(''),
                 trueAnswer: this.number(0),
+                questionPosition: this.number(0),
                 answers: this.attr({
                     answersText: this.string('')
                 })

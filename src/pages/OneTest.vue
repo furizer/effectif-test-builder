@@ -9,7 +9,7 @@
     <div v-for="item in test" :key="item.id" >
 
     <div class="test">
-        <div>Вопрос : {{ item.questionText }}</div>
+        <div>Вопрос № {{ item.questionPosition }} : {{ item.questionText }}</div>
         <div>Ответы : </div>
         <div v-for="answer in item.answers" :key="answer.id">
             {{ answer.answerText }} {{ item.trueAnswer }}

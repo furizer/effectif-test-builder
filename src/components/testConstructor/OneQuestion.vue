@@ -3,16 +3,22 @@
 
         <div class="question__header">
 
-            <span class="question-mark"></span>
+            <span class="question-mark">{{ question.questionPosition }}</span>
             
 
-            <input class="question-input" v-model="newQuestion.questionText" placeholder="Вопрос" @change="trueAnswerAndSave">
+            <input class="question-input" 
+                v-model="newQuestion.questionText" 
+                placeholder="Вопрос" 
+                @change="trueAnswerAndSave" 
+                nameForCheck="questionText">
+
+ 
 
             <div class="question__controller">
 
                 <div class="btn add-answer" @click="addAnswer"> Добавить ответ </div>
 
-                <div class="btn save-question" @click="showAnswerList"> Ответы </div>
+                <div :class=" { 'btn show-question' : true, active : answerList }" @click="showAnswerList"> Ответы </div>
 
                 <div class="btn delete-question" @click="deleteQuestion"> Удалить </div>
 
@@ -31,18 +37,24 @@
 
                 <div class="answer-label-header">
                     <div class="answer-label-title">Верный ответ</div>
-
-                    <input type="radio" :name=" 'answer' + question.id " class="answer-checkbox-hidden" :radioId="index">
+                    
+                    <input 
+                        type="radio" 
+                        :name=" 'answer' + question.id " 
+                        class="answer-checkbox-hidden" 
+                        :radioId="index"
+                        nameForCheck="trueAnswer"
+                    >
 
                     <div class="answer-checkbox">
-                        <span></span>
+                        
                     </div>
 
                 </div>
-                <div>
-                    <textarea class="answer__text"  v-model="answer.answerText" ></textarea>
-                </div>
-                <div class="btn delete-question" @click="deleteAnswer"> Удалить ответ</div>
+                <textarea class="answer__text"  v-model="answer.answerText" nameForCheck="answerText"></textarea>
+
+                <div class="btn delete-question" @click="deleteAnswer(answer.id)"> Удалить ответ</div>
+
 
             </label>
         
@@ -54,9 +66,9 @@
 <script>
 export default {
     props : {
-        question : { type:Object }
-    },
+        question : { type:Object },
 
+    },
 
     data() {
         return {
@@ -64,12 +76,16 @@ export default {
                 'id' : this.question.id,
                 'questionText' : '',
                 'trueAnswer' : null,
+                'questionPosition' : this.question.questionPosition,
                 'answers' : [ 
-                    {
-                        'answerText' : '',
-                    },  
+                    // {
+                    //     'id' : 0,
+                    //     'answerText' : '',
+                    // },  
                 ]                    
             },
+
+
 
             answerList : false,
         }
@@ -78,12 +94,14 @@ export default {
     methods: {
         addAnswer() {
             let answer = Object.assign({}, this.newQuestion.answers[0])
-            
+            answer.id = Date.now()
+            answer.answerText = ''
             this.newQuestion.answers.push(answer)
 
             if(this.answerList == false){
                 this.answerList = true
             }
+            
         },
 
         trueAnswerAndSave(e) {
@@ -92,26 +110,7 @@ export default {
                 this.newQuestion.trueAnswer = index
             }
             this.$emit('saveQuestion', this.newQuestion)
-            // let labels = document.querySelectorAll('.answer-label')
-            // labels.forEach( (element, index) => {
-            //     element = element.querySelector('input[type="radio"]')
-            //     if(element.checked){
-            //         this.newQuestion.trueAnswer = index
-            //         this.saveQuestion()
-            //         return
-            //     }
-            // });
-            // let container = e.target.parentElement.parentElement.parentElement
-            // container = container.querySelectorAll('label')
-            // console.log(container);
-            // container.forEach(element => {
-            //     if(element){
-            //         return 1
-            //     }
-            // });
-            // this.$emit('saveQuestion', this.newQuestion)
         },
-        
 
         showAnswerList() {
             if(this.answerList === false){
@@ -122,15 +121,14 @@ export default {
             
         },
 
-
-        deleteAnswer() {
-            return 0
+        deleteAnswer(answerId) {
+            console.log(answerId);
+            this.newQuestion.answers = this.newQuestion.answers.filter((item) => item.id !== answerId)
+           
         },
-
         deleteQuestion() {
             this.$emit('deleteQuestion', this.newQuestion)
         },        
-
     },
 
 }
