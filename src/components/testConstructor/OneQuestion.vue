@@ -38,6 +38,7 @@
 
                 :key="answer.id" 
                 :name=" 'answer' + question.id "
+                :title=" 'Вопрос № ' "
             >
 
                 <div class="answer-label-header">
@@ -138,7 +139,7 @@ export default {
                 let i = this.newQuestion.trueAnswer - 1
                 this.newQuestion.trueAnswer = i
             }
-            
+
             this.$emit('saveQuestion', this.newQuestion)
 
         },
