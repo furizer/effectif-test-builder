@@ -60,7 +60,7 @@
                 </div>
                 <textarea class="answer__text"  v-model="answer.answerText" nameForCheck="answerText"></textarea>
 
-                <div class="btn delete-btn" @click="deleteAnswer(answer.id)"> Удалить ответ</div>
+                <div class="btn delete-btn" @click="deleteAnswer(answer.id, index)"> Удалить ответ</div>
 
 
             </label>
@@ -128,16 +128,19 @@ export default {
                 this.answerList = false
             }
 
-            // if(this.newQuestion.trueAnswer != null) {
-
-            // }
             
         },
 
-        deleteAnswer(answerId) {
+        deleteAnswer(answerId, index) {
             this.newQuestion.answers = this.newQuestion.answers.filter((item) => item.id !== answerId)
-            this.$emit('saveQuestion', this.newQuestion)
+
+            if(index < this.newQuestion.trueAnswer){
+                let i = this.newQuestion.trueAnswer - 1
+                this.newQuestion.trueAnswer = i
+            }
             
+            this.$emit('saveQuestion', this.newQuestion)
+
         },
         deleteQuestion() {
             this.$emit('deleteQuestion', this.newQuestion)
