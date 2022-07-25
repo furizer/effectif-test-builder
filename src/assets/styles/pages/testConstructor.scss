@@ -158,3 +158,38 @@
         padding: 7px 30px;
     }
 }
+
+.answer__footer{
+    opacity: 0;
+    height: 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    // transition: opacity 0.1s;
+
+}
+
+.answer__mark{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.answer-label:hover {
+    .answer__footer{
+        opacity: 1;
+        height: unset;
+        // transition: opacity 0.1s;
+
+    }
+    .answer__mark{
+        display: none;
+    }
+}
+
+.answer-label.active {
+    background: $siteOrange;
+    .answer__text{
+        border-color: $siteOrange;
+    }
+}
+

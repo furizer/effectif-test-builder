@@ -95,20 +95,28 @@
     label{
         .delete-btn{
             font-size: 12px;
-            opacity: 0;
-            width: 100%;
-            padding: 10px 15px;
+            padding: 8px 13px;
             transition: 0.2s;
-            max-width: 150px;
-
         } 
+
+        .end-create-btn{
+            font-size: 12px;
+            padding: 8px 13px;
+            transition: 0.2s;            
+        }
     } 
 }
 
-.answer-label:hover{
-    .delete-btn {
-        opacity: 1;
+.answer-label{
+    .delete-btn:hover {
         background: $siteRed;
         color: $siteWhite;
+        opacity: 0.85;
+
     }
+    .end-create-btn:hover {
+        opacity: 0.85;
+        background: $siteGreen;
+        color: $siteWhite;
+    }    
 }

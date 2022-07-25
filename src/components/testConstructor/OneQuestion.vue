@@ -31,37 +31,34 @@
 
         <div class="answers__container" v-if="answerList">
 
-            <label class="answer-label" 
-                v-for="(answer, index) in newQuestion.answers" 
-                
+            <label 
+            v-for="(answer, index) in newQuestion.answers" 
+            
                 @change="trueAnswerAndSave" 
-
+                
+                :class="trueAnswerActive(index)" 
                 :key="answer.id" 
                 :name=" 'answer' + question.id "
-                :title=" 'Ответ № ' + index"
             >
+                <input 
+                    type="radio" 
+                    class="answer-checkbox-hidden" 
+                    nameForCheck="trueAnswer"
 
-                <div class="answer-label-header">
-                    <div class="answer-label-title">Верный ответ</div>
-                    
-                    <input 
-                        type="radio" 
-                        class="answer-checkbox-hidden" 
-                        nameForCheck="trueAnswer"
+                    :name=" 'answer' + question.id " 
+                    :radioId="index"
+                    :checked="checked(index)"
+                >
 
-                        :name=" 'answer' + question.id " 
-                        :radioId="index"
-                        :checked="checked(index)"
-                    >
-
-                    <div class="answer-checkbox">
-                        
-                    </div>
-
-                </div>
                 <textarea class="answer__text"  v-model="answer.answerText" nameForCheck="answerText"></textarea>
 
-                <div class="btn delete-btn" @click="deleteAnswer(answer.id, index)"> Удалить ответ</div>
+                <div class="answer__footer">
+                    <div class="btn end-create-btn" > Верный ответ</div>
+                    <div class="btn delete-btn" @click="deleteAnswer(answer.id, index)"> Удалить ответ</div>
+                </div>
+
+                <div class="answer__mark">Ответ № {{ index + 1 }}</div>                
+
 
 
             </label>
@@ -120,6 +117,15 @@ export default {
                 this.newQuestion.trueAnswer = index
             }
             this.$emit('saveQuestion', this.newQuestion)
+        },
+
+
+        trueAnswerActive(index) {
+            let active = ''
+            if(index == this.newQuestion.trueAnswer){
+                active = 'active'
+            }
+            return `answer-label ${active}` 
         },
 
         showAnswerList() {
