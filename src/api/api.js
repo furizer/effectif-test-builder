@@ -32,14 +32,18 @@ const api = {
         tests (args, cb) {
             setTimeout(() => cb(mock.tests), delay)
         }, 
-     
-
-        
         save(args, cb) {
             setTimeout(() => cb(save('tests', args)), delay)
         },
 
     },
+
+    testPassing: {
+
+        save(args, cb) {
+            setTimeout(() => cb(save('userTestResult', args)), delay)
+        },
+    }
 }
 
 export default api;

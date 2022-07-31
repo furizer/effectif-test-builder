@@ -32,7 +32,7 @@
         <div class="answers__container" v-if="answerList">
 
             <label 
-            v-for="(answer, index) in newQuestion.answers" 
+                v-for="(answer, index) in newQuestion.answers" 
             
                 @change="trueAnswerAndSave" 
                 
@@ -49,8 +49,7 @@
                     :radioId="index"
                     :checked="checked(index)"
                 >
-
-                <textarea class="answer__text"  v-model="answer.answerText" nameForCheck="answerText"></textarea>
+                <textarea class="answer__text"  v-model="answer.answerText" nameForCheck="answerText" ></textarea>
 
                 <div class="answer__footer">
                     <div class="btn end-create-btn" > Верный ответ</div>
@@ -83,10 +82,7 @@ export default {
                 'trueAnswer' : null,
                 'questionPosition' : this.question.questionPosition,
                 'answers' : [ 
-                    // {
-                    //     'id' : 0,
-                    //     'answerText' : '',
-                    // },  
+                    
                 ]                    
             },
             answerList : false,
@@ -96,16 +92,31 @@ export default {
 
     methods: {
         addAnswer() {
+
             let answer = Object.assign({}, this.newQuestion.answers[0])
-            answer.id = Date.now()
+            answer.id = this.counter()
+
             answer.answerText = ''
             this.newQuestion.answers.push(answer)
-
             if(this.answerList == false){
                 this.answerList = true
-            }
-            
+            }        
         },
+        deleteAnswer(answerId, index) {
+  
+            this.newQuestion.answers = this.newQuestion.answers.filter((item) => item.id !== answerId)
+            
+            let arrayLength = this.newQuestion.answers.length
+            if(arrayLength > 1 && answerId - 1 < arrayLength) {
+
+                this.newQuestion.answers[arrayLength - 1].id = answerId
+            }
+
+            if(index < this.newQuestion.trueAnswer){
+                let i = this.newQuestion.trueAnswer - 1
+                this.newQuestion.trueAnswer = i
+            }
+        },        
 
         checked(index) {
             if(index == this.newQuestion.trueAnswer) return true
@@ -138,17 +149,15 @@ export default {
             
         },
 
-        deleteAnswer(answerId, index) {
-            this.newQuestion.answers = this.newQuestion.answers.filter((item) => item.id !== answerId)
-
-            if(index < this.newQuestion.trueAnswer){
-                let i = this.newQuestion.trueAnswer - 1
-                this.newQuestion.trueAnswer = i
-            }
-
-            this.$emit('saveQuestion', this.newQuestion)
-
+        counter() {
+            let count = 0;
+            this.counter = function() {
+                return count++;
+            };
+            return count
         },
+
+
         deleteQuestion() {
             this.$emit('deleteQuestion', this.newQuestion)
         },        
@@ -162,6 +171,12 @@ export default {
         }else{
             this.answerListButton = true
         }
+    },
+
+
+    created() {
+        // инициализация счетчика айдишиников
+        this.counter() 
     },
 
 }

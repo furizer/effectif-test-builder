@@ -9,6 +9,7 @@ export default class Test extends Model {
         return {
             id: this.number(0),
             name: this.string(''),
+            text: this.string(''),
             
             questions: this.attr({
                 id: this.number(0),
@@ -18,7 +19,9 @@ export default class Test extends Model {
                 answers: this.attr({
                     answersText: this.string('')
                 })
-            })
+            }),
+
+        
          
         }
     }

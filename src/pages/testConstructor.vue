@@ -18,11 +18,7 @@
                 <div class="btn end-create-btn" @click="saveTest" v-if="tests">
                     Сохранить
                 </div>
-                <div class="btn delete-btn">
-                    <PageCrumbs
-                        :entities="crumbsEntities"
-                    /> 
-                </div>
+                <router-link :to="{ name:'builderIndex' }"  class="btn routeback-btn"> Обратно </router-link>
             </div>
         </div>
     </div>
@@ -43,26 +39,17 @@
 </template>
 
 <script>
-import PageCrumbs from '@/components/PageCrumbs'
 import Test from '@/store/test/Test'
 import OneQuestion from '@/components/testConstructor/OneQuestion'
 import TestCreateStatus from '@/components/testConstructor/TestCreateStatus'
 
 
 export default {
-    components : { PageCrumbs, OneQuestion, TestCreateStatus },
+    components : { OneQuestion, TestCreateStatus },
 
     data() {
         return {
-            
             currentStatus : null,   
-            
-            crumbsEntities: [
-                {
-                    'text': 'Отменить',
-                    'routeName': 'builderIndex',
-                }
-            ],
 
             newTest: {
                 'id': null,
@@ -83,6 +70,8 @@ export default {
                     // }
                 ]
             },
+
+            
 
         }
     },     
@@ -122,7 +111,11 @@ export default {
 
         addQuestion() {
             let question = Object.assign({}, this.newTest.questions[0])
-            question.id = Date.now()
+
+
+            question.id = this.counter()
+
+
             this.newTest.questions.push(question)
 
             this.setQuestionPosition()
@@ -138,7 +131,16 @@ export default {
             console.log('save question');
             let i = this.newTest.questions.findIndex(item => item.id === data.id)
             this.newTest.questions[i] = data
-        },        
+        },      
+        
+        
+        counter() {
+            let count = 0;
+            this.counter = function() {
+                return count++;
+            };
+            return count
+        }
     
     },
 
@@ -149,6 +151,11 @@ export default {
             return
         }
         Test.fetch()
+
+        // инициализация счетчика айдишиников
+        this.counter() 
+
+
     }, 
     
 }
