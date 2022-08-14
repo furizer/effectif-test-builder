@@ -1,8 +1,3 @@
-/**
- * Валидатор набора полей.
- * @author Egor Vasyakin egor@evas-php.com
- * @license CC-BY-4.0
- */
 import Field from './Field.js'
 
 export default class Fieldset {
