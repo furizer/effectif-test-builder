@@ -1,7 +1,3 @@
-/**
- * Расширение базовой модели vuex-orm поддержкой api-маршрутов.
- * @license CC-BY-4.0
- */
 import { Model } from '@vuex-orm/core'
 import api from '@/api/api.js'
 import Fieldset from '@/core/Fieldset.js'
