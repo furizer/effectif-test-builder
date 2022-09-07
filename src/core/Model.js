@@ -1,3 +1,8 @@
+/**
+ * Расширение базовой модели vuex-orm поддержкой api-маршрутов.
+ * @author Egor Vasyakin egor@evas-php.com
+ * @license CC-BY-4.0
+ */
 import { Model } from '@vuex-orm/core'
 import api from '@/api/api.js'
 import Fieldset from '@/core/Fieldset.js'

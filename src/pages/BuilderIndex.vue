@@ -37,12 +37,6 @@ export default {
         }
     },
 
-    created() {
-        if(Object.keys(this.tests).length > 0){
-            return
-        }
-        Test.fetch()
-    },
 }
 
 </script>

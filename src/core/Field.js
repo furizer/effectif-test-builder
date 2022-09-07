@@ -1,3 +1,8 @@
+/**
+ * Валидатор поля.
+ * @author Egor Vasyakin egor@evas-php.com
+ * @license CC-BY-4.0
+ */
 export default class Field {
     /** @var string имя поля */
     name

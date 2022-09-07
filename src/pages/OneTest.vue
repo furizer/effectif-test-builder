@@ -128,10 +128,5 @@ export default {
         },
     },
 
-
-    created() {
-        if(Object.keys(this.test).length == 0) {Test.fetch()}
-    },
-
 }
 </script>

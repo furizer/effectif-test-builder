@@ -43,7 +43,15 @@ const api = {
         save(args, cb) {
             setTimeout(() => cb(save('userTestResult', args)), delay)
         },
-    }
+    },
+
+    preload: (args, cb) => {
+        setTimeout(() => cb({
+
+            Test: mock.tests
+
+        }), delay)
+    },    
 }
 
 export default api;

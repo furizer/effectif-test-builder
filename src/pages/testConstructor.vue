@@ -111,13 +111,8 @@ export default {
 
         addQuestion() {
             let question = Object.assign({}, this.newTest.questions[0])
-
-
             question.id = this.counter()
-
-
             this.newTest.questions.push(question)
-
             this.setQuestionPosition()
         },
         // Удаление вопроса
@@ -147,14 +142,8 @@ export default {
 
     created() {
         this.setQuestionPosition()        
-        if(Object.keys(this.tests).length > 0){
-            return
-        }
-        Test.fetch()
-
         // инициализация счетчика айдишиников
         this.counter() 
-
 
     }, 
     
